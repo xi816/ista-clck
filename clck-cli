@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+import sys;
+import time;
+from clck import Clock;
+
+def main(argc: int, argv: list):
+  e_824083 = 3; # Timezone GMT+3dec
+  while (True):
+    e_902835 = time.time();
+    e_490237 = Clock(e_902835, e_824083);
+    e_923171 = e_490237.calculateDecimalTime() if (len(sys.argv) > 1 and sys.argv[1] == "-DEC") else e_490237.calculateHeximalTime();
+
+    if (len(sys.argv) > 1 and sys.argv[1] == "-DEC"):
+      print(f"{e_923171[3]:0>2}.{e_923171[4]:0>2}", end=" ");
+    print(f"{e_923171[0]:0>2}:{e_923171[1]:0>2}:{e_923171[2]:0>2}", end="\r");
+    time.sleep(1);
+  return 0;
+
+if (__name__ == "__main__"):
+  sys.exit(main(len(sys.argv), sys.argv));
+ 

@@ -1,0 +1,42 @@
+#!/usr/bin/python3
+import sys;
+import time;
+
+import pygame as pg;
+from clck import Clock;
+
+pg.init();
+
+def main(argc: int, argv: list):
+  Display = pg.display.set_mode((600, 600), pg.NOFRAME);
+  fps = pg.time.Clock();
+  dc = False;
+
+  e_824083 = 3; # Timezone GMT+3
+  while (True):
+    for ev in pg.event.get():
+      if (ev.type == pg.QUIT):
+        return 2;
+      elif (ev.type == pg.KEYDOWN):
+        if (ev.key == pg.K_SPACE):
+          dc = not dc;
+    font = pg.font.SysFont("monomakhunicode", 40);
+    e_902835 = time.time();
+    e_490237 = Clock(e_902835, e_824083);
+    e_923171 = e_490237.calculateDecimalTime() if (dc) else e_490237.calculateHeximalTime();
+
+    Display.fill((0xFF, 0xFF, 0xFF));
+    Display.blit(font.render("Часы", (0x00, 0x00, 0x00), True), (254, 50));
+    font = pg.font.SysFont("monomakhunicode", 60);
+    Display.blit(font.render(f"{e_923171[0]:0>2}:{e_923171[1]:0>2}:{e_923171[2]:0>2}", (0x00, 0x00, 0x00), True), (190, 150));
+    if (dc):
+      Display.blit(font.render(f"{e_923171[3]:0>2}.{e_923171[4]:0>2}", (0x00, 0x00, 0x00), True), (190, 225));
+    Display.blit(pg.image.load("./tutorial.png"), (100, 350));
+    pg.display.update();
+    fps.tick(30);
+  print(e_923171);
+  return 0;
+
+if (__name__ == "__main__"):
+  sys.exit(main(len(sys.argv), sys.argv));
+ 
