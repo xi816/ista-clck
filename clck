@@ -17,21 +17,16 @@ def main(argc: int, argv: list):
     for ev in pg.event.get():
       if (ev.type == pg.QUIT):
         return 2;
-      elif (ev.type == pg.KEYDOWN):
-        if (ev.key == pg.K_SPACE):
-          dc = not dc;
-    font = pg.font.SysFont("monomakhunicode", 40);
+    font = pg.font.SysFont("cambria", 40);
     e_902835 = time.time();
     e_490237 = Clock(e_902835, e_824083);
-    e_923171 = e_490237.calculateDecimalTime() if (dc) else e_490237.calculateHeximalTime();
+    e_923171 = e_490237.calculateDecimalTime();
 
     Display.fill((0xFF, 0xFF, 0xFF));
     Display.blit(font.render("Часы", (0x00, 0x00, 0x00), True), (254, 50));
-    font = pg.font.SysFont("monomakhunicode", 60);
+    font = pg.font.SysFont("cambria", 60);
     Display.blit(font.render(f"{e_923171[0]:0>2}:{e_923171[1]:0>2}:{e_923171[2]:0>2}", (0x00, 0x00, 0x00), True), (190, 150));
-    if (dc):
-      Display.blit(font.render(f"{e_923171[3]:0>2}.{e_923171[4]:0>2}", (0x00, 0x00, 0x00), True), (190, 225));
-    Display.blit(pg.image.load("./tutorial.png"), (100, 350));
+    Display.blit(font.render(f"{e_923171[3]:0>2}.{e_923171[4]:0>2}", (0x00, 0x00, 0x00), True), (190, 225));
     pg.display.update();
     fps.tick(30);
   print(e_923171);
